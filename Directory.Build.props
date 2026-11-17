@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <!--
+    Path to your Gorilla Tag install. Override on the command line if it moves:
+      dotnet build -c Release -p:GamePath="E:\Games\Gorilla Tag"
+  -->
+  <PropertyGroup>
+    <GamePath Condition="'$(GamePath)' == ''">D:\SteamLibrary\steamapps\common\Gorilla Tag</GamePath>
+    <GameManagedPath>$(GamePath)\Gorilla Tag_Data\Managed</GameManagedPath>
+    <BepInExCorePath>$(GamePath)\BepInEx\core</BepInExCorePath>
+    <PluginsPath>$(GamePath)\BepInEx\plugins</PluginsPath>
+  </PropertyGroup>
+</Project>

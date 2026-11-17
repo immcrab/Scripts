@@ -1,0 +1,7 @@
+C:\Users\owen2\Downloads\Scripts\obj\Release\Scripts.csproj.AssemblyReference.cache
+C:\Users\owen2\Downloads\Scripts\obj\Release\Scripts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\owen2\Downloads\Scripts\obj\Release\Scripts.AssemblyInfoInputs.cache
+C:\Users\owen2\Downloads\Scripts\obj\Release\Scripts.AssemblyInfo.cs
+C:\Users\owen2\Downloads\Scripts\obj\Release\Scripts.csproj.CoreCompileInputs.cache
+C:\Users\owen2\Downloads\Scripts\bin\Release\Scripts.dll
+C:\Users\owen2\Downloads\Scripts\obj\Release\Scripts.dll

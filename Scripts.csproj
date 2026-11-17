@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>Scripts</AssemblyName>
+    <RootNamespace>Scripts</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <DebugType>embedded</DebugType>
+    <Version>1.0.0</Version>
+    <!-- dotnet build -c Release -p:Deploy=true copies Scripts.dll into BepInEx\plugins\Scripts. -->
+    <Deploy Condition="'$(Deploy)' == ''">false</Deploy>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Game + Unity assemblies, referenced from the local install. Never copied to output. -->
+    <GameAssembly Include="$(GameManagedPath)\*.dll"
+                  Exclude="$(GameManagedPath)\mscorlib.dll;$(GameManagedPath)\netstandard.dll;$(GameManagedPath)\System.dll;$(GameManagedPath)\System.*.dll;$(GameManagedPath)\Mono.*.dll;$(GameManagedPath)\Microsoft.*.dll" />
+    <Reference Include="@(GameAssembly)" Private="false" />
+
+    <Reference Include="BepInEx">
+      <HintPath>$(BepInExCorePath)\BepInEx.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="CheckGamePath" BeforeTargets="ResolveAssemblyReferences">
+    <Error Condition="!Exists('$(GameManagedPath)\Assembly-CSharp.dll')"
+           Text="Gorilla Tag not found at '$(GamePath)'. Build with -p:GamePath=&quot;path\to\Gorilla Tag&quot;." />
+  </Target>
+
+  <Target Name="DeployToPlugins" AfterTargets="Build" Condition="'$(Deploy)' == 'true'">
+    <MakeDir Directories="$(PluginsPath)\Scripts" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(PluginsPath)\Scripts" />
+    <Message Importance="high" Text="Scripts deployed to $(PluginsPath)\Scripts" />
+  </Target>
+
+</Project>
